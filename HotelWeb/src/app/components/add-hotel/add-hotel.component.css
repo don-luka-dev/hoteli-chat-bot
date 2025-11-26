@@ -1,0 +1,77 @@
+.hotel-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hotel-form h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937; /* text-gray-800 */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.hotel-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  color: #1f2937;
+}
+
+.hotel-form input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 8px;
+  margin-top: 0.25rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.hotel-form input:focus {
+  outline: none;
+  border-color: #3b82f6; /* blue-500 */
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+
+.hotel-form button {
+  background-color: #3b82f6; /* blue-500 */
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.hotel-form button:hover:enabled {
+  background-color: #2563eb; /* blue-600 */
+}
+
+.hotel-form button:disabled {
+  background-color: #93c5fd; /* blue-300 */
+  cursor: not-allowed;
+}
+
+.success {
+  color: #10b981; /* green-500 */
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.error {
+  color: #ef4444; /* red-500 */
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}

@@ -1,0 +1,49 @@
+<div class="space-y-3">
+  <div>
+    <label class="block text-sm font-medium mb-1">Slika</label>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+
+    @if (file()) {
+      <div class="text-xs text-gray-500 mt-1">
+        Odabrano: {{ file()?.name }}
+      </div>
+    }
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    <div>
+      <label class="block text-sm font-medium mb-1">Naslov (opcionalno)</label>
+      <input
+        pInputText
+        class="w-full"
+        [ngModel]="naslov()"
+        (ngModelChange)="naslov.set($event)" />
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1">Opis (opcionalno)</label>
+      <input
+        pInputText
+        class="w-full"
+        [ngModel]="opis()"
+        (ngModelChange)="opis.set($event)" />
+    </div>
+  </div>
+
+  <div class="pt-1 flex items-center gap-3">
+    <button
+      pButton
+      type="button"
+      label="Dodaj sliku"
+      icon="pi pi-upload"
+      severity="primary"
+      [loading]="loading()"
+      [disabled]="loading() || !file()"
+      (click)="upload()">
+    </button>
+
+    @if (error()) {
+      <span class="text-sm text-red-600">{{ error() }}</span>
+    }
+  </div>
+</div>

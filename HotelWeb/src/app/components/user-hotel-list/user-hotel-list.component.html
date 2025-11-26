@@ -1,0 +1,70 @@
+<div class="p-6 max-w-5xl mx-auto">
+  <div class="flex items-center justify-between">
+    <h2 class="text-xl md:text-2xl font-semibold">Moji hoteli</h2>
+
+    <button pButton type="button" label="Dodaj novi hotel" icon="pi pi-plus" [routerLink]="['/hoteli/novi']"
+      severity="primary" class="w-full sm:w-auto"></button>
+
+    <button pButton severity="secondary" (click)="reload()" class="rounded-2xl">Osvježi</button>
+  </div>
+
+  <div class="mt-4 bg-white rounded-2xl shadow-sm">
+    @if (loading()) {
+    <div class="flex items-center justify-center py-16">
+      <p-progressSpinner styleClass="w-10 h-10" ariaLabel="Učitavanje"></p-progressSpinner>
+    </div>
+    } @else {
+    @if (error()) {
+    <div class="p-4 text-red-600">{{ error() }}</div>
+    } @else {
+    @if (hoteli().length === 0) {
+    <div class="p-6 text-slate-600">Trenutno nemaš nijedan hotel.</div>
+    } @else {
+    <p-table [value]="hoteli()" [rowHover]="true" [stripedRows]="true" [tableStyle]="{ 'min-width': '60rem' }"
+      class="rounded-2xl overflow-hidden">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="w-14"></th>
+          <th>Naziv</th>
+          <th>Adresa</th>
+          <th>Mjesto</th>
+          <th>Kontakt</th>
+          <th>Status</th>
+          <th class="text-right pr-4">Akcije</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-hotel>
+        <tr class="cursor-pointer" (click)="open(hotel.id)">
+          <td>
+            <p-avatar image="{{ hotel.urlSlike || placeholder }}" shape="square" styleClass="rounded-xl"></p-avatar>
+          </td>
+          <td class="font-medium">
+            {{ hotel.naziv }}
+            <div class="text-xs text-slate-500">ID: {{ hotel.id }}</div>
+          </td>
+          <td class="text-slate-700">
+            {{ hotel.adresa || '—' }}
+          </td>
+          <td class="text-slate-700">
+            {{ hotel.mjestoNaziv || '—' }}
+          </td>
+          <td class="text-slate-700">
+            @if (hotel.kontaktEmail) { <div>{{ hotel.kontaktEmail }}</div> }
+            @if (hotel.kontaktBroj) { <div class="text-sm">{{ hotel.kontaktBroj }}</div> }
+          </td>
+          <td>
+            <p-tag [value]="hotel.statusHotela || 'N/A'" [severity]="statusSeverity(hotel)"></p-tag>
+          </td>
+          <td class="text-right pr-4" (click)="$event.stopPropagation()">
+            <button pButton severity="danger" icon="pi pi-trash" class="rounded-xl" (click)="onDelete(hotel.id)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    }
+    }
+    }
+  </div>
+</div>

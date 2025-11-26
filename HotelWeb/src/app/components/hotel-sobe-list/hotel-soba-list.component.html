@@ -1,0 +1,41 @@
+@if (sobe().length > 0) {
+<div
+  class="soba-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
+>
+  @for (soba of sobe(); track soba.id) {
+  <div
+    class="soba-card rounded-xl overflow-hidden shadow-md hover:shadow-lg transition"
+    [routerLink]="['/hoteli', hotelId(), 'sobe', soba.id]"
+    style="cursor: pointer"
+  >
+    @if(soba.urlSlike){
+    <img
+      [src]="soba.urlSlike"
+      alt="Slika sobe"
+      class="w-full h-48 object-cover"
+    />
+    }
+
+    <div class="p-4">
+      <p class="text-lg font-semibold">{{ soba.naziv }}</p>
+      <p class="text-sm text-gray-600">
+        {{ soba.brojKreveta }} kreveta · {{ soba.cijenaNocenja }} €
+      </p>
+    </div>
+  </div>
+  }
+</div>
+} @else {
+<p class="text-sm text-gray-500 mt-4">Nema dostupnih soba za ovaj hotel.</p>
+}
+  @if(authService.isAdmin()){
+<div class="mt-6">
+  <a
+    pButton
+    type="button"
+    label="Dodaj novu sobu"
+    [severity]="'primary'"
+    [routerLink]="['/hoteli', hotelId(), 'sobe', 'novi']"
+  ></a>
+</div>
+  }

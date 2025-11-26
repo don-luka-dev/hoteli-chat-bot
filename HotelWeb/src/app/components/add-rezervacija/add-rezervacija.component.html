@@ -1,0 +1,48 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="space-y-4 p-4 max-w-md mx-auto"
+>
+  <!-- Napomena -->
+  <div>
+    <label for="napomena" class="block text-sm font-medium text-gray-700"
+      >Opis rezervacije</label
+    >
+    <input
+      id="napomena"
+      type="text"
+      pInputText
+      formControlName="napomena"
+      class="mt-1 w-full"
+      placeholder="Unesite opis rezervacije"
+    />
+  </div>
+
+  <!-- Datum od - do -->
+  <div>
+    <label for="datumOdDo" class="block text-sm font-medium text-gray-700"
+      >Datum od - do</label
+    >
+    <p-calendar
+      id="datumOdDo"
+      formControlName="datumOdDo"
+      selectionMode="range"
+      dateFormat="dd.mm.yy"
+      placeholder="Odaberite raspon datuma"
+      showIcon="true"
+      class="mt-1 w-full"
+      [styleClass]="'block w-full mt-1'"
+      [inputStyleClass]="'w-full'"
+      [autofocus]="false"
+    ></p-calendar>
+  </div>
+  
+  <!-- Gumb -->
+  <button
+    pButton
+    type="submit"
+    label="Rezerviraj"
+    class="w-full mt-4"
+    [disabled]="form.invalid"
+  ></button>
+</form>

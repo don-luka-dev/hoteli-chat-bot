@@ -1,0 +1,130 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+  <div class="w-full max-w-md space-y-6 bg-white p-8 rounded-2xl shadow-xl">
+    <h2 class="text-2xl font-bold text-center text-gray-800">
+      Dodaj novu sobu
+    </h2>
+
+    @if (successMessage()) {
+    <p-message severity="success">
+      {{ successMessage() }}
+    </p-message>
+    } @else if (errorMessage()) {
+    <p-message severity="error">
+      {{ errorMessage() }}
+    </p-message>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Naziv sobe -->
+      <div>
+        <label for="naziv" class="block text-sm font-medium text-gray-700"
+          >Naziv sobe</label
+        >
+        <input
+          id="naziv"
+          type="text"
+          pInputText
+          formControlName="naziv"
+          class="mt-1 w-full"
+          placeholder="Unesite naziv sobe"
+        />
+        <!--trebao bi moći napisat form.controls.naziv. bez ['naziv'], onda možeš imati typesafe pristupanje kontrolama-->
+        @if (form.controls['naziv'].invalid && form.controls['naziv'].touched) {
+        <small class="text-red-500">Polje je obavezno.</small>
+        }
+      </div>
+
+      <!-- Broj kreveta -->
+      <div>
+        <label for="brojKreveta" class="block text-sm font-medium text-gray-700"
+          >Broj kreveta</label
+        >
+        <input
+          id="brojKreveta"
+          type="number"
+          pInputText
+          formControlName="brojKreveta"
+          class="mt-1 w-full"
+          placeholder="Unesite broj kreveta"
+        />
+        @if (form.controls['brojKreveta'].invalid &&
+        form.controls['brojKreveta'].touched) {
+        <small class="text-red-500">Polje je obavezno.</small>
+        }
+      </div>
+
+      <!-- Cijena po noći -->
+      <div>
+        <label
+          for="cijenaNocenja"
+          class="block text-sm font-medium text-gray-700"
+          >Cijena po noći</label
+        >
+        <input
+          id="cijenaNocenja"
+          type="number"
+          pInputText
+          formControlName="cijenaNocenja"
+          class="mt-1 w-full"
+          placeholder="Unesite cijenu"
+        />
+        @if (form.controls['cijenaNocenja'].invalid &&
+        form.controls['cijenaNocenja'].touched) {
+        <small class="text-red-500">Polje je obavezno.</small>
+        }
+      </div>
+
+      <label class="block">
+      Naslovna slika sobe:
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="block mt-1"
+      />
+    </label>
+
+    <div>
+        <label for="naslovSlike" class="block text-sm font-medium text-gray-700"
+          >Naslov slike</label
+        >
+        <input
+          id="naslovSlike"
+          type="text"
+          pInputText
+          formControlName="naslovSlike"
+          class="mt-1 w-full"
+          placeholder="Unesite naslov sobe"
+        />
+        @if (form.controls['naslovSlike'].invalid && form.controls['naslovSlike'].touched) {
+        <small class="text-red-500">Polje je obavezno.</small>
+        }
+      </div>
+
+      <div>
+        <label for="opisSlike" class="block text-sm font-medium text-gray-700"
+          >Opis slike</label
+        >
+        <input
+          id="opisSlike"
+          type="text"
+          pInputText
+          formControlName="opisSlike"
+          class="mt-1 w-full"
+          placeholder="Unesite opis sobe"
+        />
+      </div>
+
+      <!-- Gumb -->
+      <div class="pt-2">
+        <button
+          pButton
+          type="submit"
+          label="Dodaj sobu"
+          class="w-full"
+          [disabled]="form.invalid"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>

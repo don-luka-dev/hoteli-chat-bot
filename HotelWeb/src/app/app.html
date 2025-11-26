@@ -1,0 +1,18 @@
+@if(showNavbar()) {
+<app-navbar />
+<button
+  pButton
+  icon="pi pi-comments"
+  [severity]="'info'"
+  [rounded]="true"
+  [size]="'large'"
+  class="!fixed !bottom-12 !right-12 !z-50 shadow-lg"
+  (click)="panel?.open()"
+  aria-label="Open AI Chat"
+></button>
+}
+
+<app-side-panel #panel [title]="'Chat bot'" [description]="''" />
+
+<!-- Page content that scrolls -->
+<router-outlet />

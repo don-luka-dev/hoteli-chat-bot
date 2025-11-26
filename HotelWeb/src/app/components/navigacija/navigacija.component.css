@@ -1,0 +1,9 @@
+:host ::ng-deep .p-button .p-button-icon {
+  font-size: 1.5rem;       /* bigger gear */
+  color: white !important;  /* white by default */
+  transition: color 0.2s ease;
+}
+
+:host ::ng-deep .p-button:hover .p-button-icon {
+  color: #2563eb !important; /* Tailwind blue-600 on hover */
+}

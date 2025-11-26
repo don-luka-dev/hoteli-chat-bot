@@ -1,0 +1,109 @@
+<div
+  class="min-h-screen flex flex-col justify-center items-center bg-gray-50 p-4"
+>
+  <h2 class="text-xl font-semibold mb-6 text-center">Dodaj novi hotel</h2>
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="space-y-6 max-w-md w-full bg-white p-6 rounded-lg shadow-md"
+  >
+    <!-- inputi kao prije -->
+
+    <label class="block">
+      Naziv:
+      <input
+        type="text"
+        pInputText
+        formControlName="naziv"
+        class="w-full mt-1"
+        placeholder="Unesite naziv"
+      />
+    </label>
+
+    <label class="block">
+      Kontakt broj:
+      <input
+        type="text"
+        pInputText
+        formControlName="kontaktBroj"
+        class="w-full mt-1"
+        placeholder="Unesite kontakt broj"
+      />
+    </label>
+
+    <label class="block">
+      Kontakt email:
+      <input
+        type="email"
+        pInputText
+        formControlName="kontaktEmail"
+        class="w-full mt-1"
+        placeholder="Unesite email"
+      />
+    </label>
+
+    <label class="block">
+      Adresa:
+      <input
+        type="text"
+        pInputText
+        formControlName="adresa"
+        class="w-full mt-1"
+        placeholder="Unesite adresu"
+      />
+    </label>
+
+    <label class="block">
+      Slika hotela:
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        class="block mt-1"
+      />
+    </label>
+
+    <label class="block">
+      Mjesto:
+      <p-select
+        [options]="mjesta()"
+        [filter]="true"
+        filterBy="naziv"
+        optionLabel="naziv"
+        optionValue="id"
+        formControlName="mjestoId"
+        placeholder="Odaberi mjesto"
+        class="w-full mt-1"
+      ></p-select>
+    </label>
+
+    <label class="block">
+      Status hotela:
+      <p-select
+        [options]="statusiHotela()"
+        [filter]="true"
+        filterBy="naziv"
+        optionLabel="naziv"
+        optionValue="id"
+        formControlName="statusHotelaId"
+        placeholder="Odaberi status"
+        class="w-full mt-1"
+      ></p-select>
+    </label>
+
+    <button
+      pButton
+      type="submit"
+      label="Dodaj"
+      [disabled]="form.invalid"
+      class="w-full mt-4"
+    ></button>
+  </form>
+
+  @if (successMessage()) {
+  <p-message severity="success" text="{{ successMessage() }}"></p-message>
+  } @else if (errorMessage()) {
+  <p-message severity="error" text="{{ errorMessage() }}"></p-message>
+  }
+</div>

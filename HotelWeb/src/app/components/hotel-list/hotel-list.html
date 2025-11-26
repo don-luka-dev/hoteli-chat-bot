@@ -1,0 +1,100 @@
+<div class="p-6 max-w-5xl mx-auto">
+<h2 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2 flex items-center">
+<i class="pi pi-building !text-[2rem] text-pink-600 mr-3"></i>
+  Popis hotela
+</h2>
+
+<button
+  pButton
+  icon="pi pi-sliders-h"
+  label="Filteri"
+  class="mb-4"
+  (click)="toggleFilters()"
+  [severity]="'info'"
+></button>
+
+@if (showFilters()) {
+
+<div class="p-4 mb-5 bg-white shadow rounded-2xl grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+  <div>
+    <label for="naziv" class="block text-sm font-medium text-gray-700 mb-1"
+      >Naziv hotela</label
+    >
+    <input
+      id="naziv"
+      type="text"
+      pInputText
+      [formControl]="nazivControl"
+      placeholder="Unesi naziv..."
+      class="w-full"
+    />
+  </div>
+
+  <form
+    [formGroup]="filterForm"
+    class="grid grid-cols-1 md:grid-cols-2 gap-4"
+  >
+    <div>
+      <label
+        for="mjestoNaziv"
+        class="block text-sm font-medium text-gray-700 mb-1"
+        >Mjesto</label
+      >
+      <p-select
+        [options]="mjesta()"
+        optionLabel="naziv"
+        optionValue="id"
+        placeholder="Odaberi mjesto"
+        formControlName="mjestoId"
+        inputId="mjestoId"
+        class="w-full"
+      ></p-select>
+    </div>
+
+    <div>
+      <label
+        for="statusHotelaId"
+        class="block text-sm font-medium text-gray-700 mb-1"
+        >Status hotela</label
+      >
+      <p-select
+        [options]="statusi()"
+        optionLabel="naziv"
+        optionValue="id"
+        placeholder="Odaberi status"
+        formControlName="statusHotelaId"
+        inputId="statusHotelaId"
+        class="w-full"
+      ></p-select>
+    </div>
+  </form>
+  </div>
+
+}
+
+  @if (hoteli().length > 0) {
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (hotel of hoteli(); track hotel.id) {
+    <a
+      class="cursor-pointer bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+      [routerLink]="['/hoteli', hotel.id]"
+    >
+      <img
+        [src]="hotel.urlSlike"
+        alt="Slika hotela"
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-4 space-y-1">
+        <h3 class="text-lg font-bold text-gray-800">{{ hotel.naziv }}</h3>
+        <p class="text-sm text-gray-600">{{ hotel.adresa }}</p>
+        <p class="text-sm text-gray-500">
+          {{ hotel.kontaktBroj }} | {{ hotel.kontaktEmail }}
+        </p>
+      </div>
+    </a>
+    }
+  </div>
+  } @else {
+  <p class="text-sm text-gray-500">Nema hotela za prikaz.</p>
+  }
+</div>

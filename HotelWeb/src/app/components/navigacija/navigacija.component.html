@@ -1,0 +1,66 @@
+<nav class="sticky top-0 z-50 bg-blue-500 text-white w-full">
+  <div class="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between gap-6">
+    <!-- left -->
+    <div class="flex gap-6 items-center text-sm font-medium">
+      <a routerLink="/hoteli" class="hover:underline transition text-lg">Hoteli</a>
+      <a routerLink="/sobe" class="hover:underline transition text-lg">Sobe</a>
+
+      <button
+        type="button"
+        class="text-lg hover:underline transition"
+        (click)="myActionsMenu.toggle($event)"
+      >
+        Moje akcije
+      </button>
+    
+
+    @if(authService.isAdmin()){
+       <button
+        type="button"
+        class="text-lg hover:underline transition"
+        (click)="administrationMenu.toggle($event)"
+      >
+        Administracija
+      </button>
+    }
+
+    </div>
+
+    <!-- right -->
+    <button
+      type="button"
+      pButton
+      icon="pi pi-cog"
+      [severity]="'secondary'"
+      class="p-button-rounded p-button-text bg-blue-600 hover:bg-blue-200 shadow-sm !text-white hover:!text-blue-600 !text-2xl"
+      (click)="userMenu.toggle($event)"
+      aria-haspopup="true"
+      aria-controls="user_settings_menu"
+    ></button>
+  </div>
+</nav>
+
+<!-- dropdowns (can sit anywhere, appended to body anyway) -->
+<p-menu
+  #userMenu
+  [popup]="true"
+  [model]="items"
+  appendTo="body"
+  [baseZIndex]="10000"
+></p-menu>
+
+<p-menu
+  #myActionsMenu
+  [popup]="true"
+  [model]="actions"
+  appendTo="body"
+  [baseZIndex]="10000"
+></p-menu>
+
+<p-menu
+  #administrationMenu
+  [popup]="true"
+  [model]="administration"
+  appendTo="body"
+  [baseZIndex]="10000"
+></p-menu>
