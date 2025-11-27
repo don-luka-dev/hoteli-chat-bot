@@ -30,7 +30,7 @@ var logger = new LoggerConfiguration()
         sinkOptions: new MSSqlServerSinkOptions
         {
             TableName = "Logs",
-            AutoCreateSqlTable = true  // Moûeö staviti false ako si veÊ ruËno stvorio tablicu
+            AutoCreateSqlTable = true  // Mo≈æe≈° staviti false ako si ve√¶ ru√®no stvorio tablicu
         })
     .CreateLogger();
 
@@ -144,7 +144,7 @@ builder.Services.AddScoped<SobaPlugin>();
 
 
 var apiKey = builder.Configuration["OpenAi:ApiKey"];
-builder.Services.AddOpenAIChatCompletion("gpt-4o", "apiKey");
+builder.Services.AddOpenAIChatCompletion("gpt-4o", apiKey!);
 
 builder.Services.AddScoped<KernelPluginCollection>(serviceProvider =>
 {
